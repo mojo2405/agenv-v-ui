@@ -1,32 +1,11 @@
-import { Component, Inject } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AptDataComponent } from './components/apt-data/apt-data.componont';
 import { IApartment } from './interface/IApartment';
 import { SearchComponent } from './components/search/search.component';
 import { GoogleApiService } from './services/googleapi.service';
-import {DataSource} from '@angular/cdk/collections';
 
-// import { IApartment } from './interface/IApartment';
-
-// export interface AptElement {
-//   position: number;
-//   city: string;
-//   rooms: number;
-//   price: string;
-// }
-// const ELEMENT_DATA: AptElement[] = [
-//   {position: 1, city: 'קרית ים', rooms: 3.5, price: '500000',ff: 'ttt'},
-//   {position: 2, city: 'קרית חיים', rooms: 3, price: '500000',ff: 'ttt'},
-//   {position: 3, city: 'קרית אתא', rooms: 5, price: '500000',ff: 'ttt'},
-//   {position: 4, city: 'חיפה', rooms: 4.5, price: '500000',ff: 'ttt'},
-//   {position: 5, city: 'חיפה', rooms: 1.5, price: '500000',ff: 'ttt'},
-//   {position: 6, city: 'קרית ים', rooms: 4, price: '500000',ff: 'ttt'},
-//   {position: 7, city: 'קרית ים', rooms: 3, price: '500000',ff: 'ttt'},
-//   {position: 8, city: 'קרית ים', rooms: 3, price: '500000',ff: 'ttt'},
-//   {position: 9, city: 'קרית חיים', rooms: 5, price: '500000',ff: 'ttt'},
-//   {position: 10, city: 'קרית ביאליק', rooms: 7, price: '125000',ff: 'ttt'},
-// ];
 
 export interface SearchElem {
   city: string[];
@@ -174,50 +153,13 @@ export class AppComponent {
               }
             }
             if (!found_city){
-              return;
+              continue;
             }
           }
           apts_elemnt.push(detail);
         }
         this.dataSource = new MatTableDataSource(apts_elemnt);
       });
-
-      // 11111111111111111111111
-      // let newDataSource: IApartment[] = [];
-      // this.dataSource.data.forEach(element => {
-      //   if (result.price_min && parseInt(element.price) < parseInt(result.price_min)){
-      //       return;
-      //   }
-      //   if (result.price_max && parseInt(element.price) > parseInt(result.price_max)){
-      //     return;
-      //   }
-      //   if (result.number_of_rooms_min && element.rooms < result.number_of_rooms_min){
-      //     return;
-      //   }
-      //   if(result.number_of_rooms_max){
-      //     if (result.number_of_rooms_max == "6+" && element.rooms<6){
-      //       return;
-      //     }
-      //     if( element.rooms > result.number_of_rooms_max) {
-      //       return;
-      //     }
-          
-      //   }
-      //   if (result.city){
-      //     let found_city = false;
-      //     for (const city of result.city){
-      //       if (city === element.city){
-      //         found_city = true;
-      //         break;
-      //       }
-      //     }
-      //     if (!found_city){
-      //       return;
-      //     }
-      //   }
-      //   newDataSource.push(element);
-      // });
-      // this.dataSource = new MatTableDataSource(newDataSource);
     });
   }
   highlightChips(result:any){
@@ -233,7 +175,7 @@ export class AppComponent {
   if(result.number_of_rooms_max){
     this.chips_arr.push(this.chips_input.number_of_rooms_max + ': '+result.number_of_rooms_max);
   }
-  if (result.city){
+  if (result.city && result.city.length != 0){
     this.chips_arr.push(this.chips_input.city + ': '+result.city.join(', '));
   }
 }

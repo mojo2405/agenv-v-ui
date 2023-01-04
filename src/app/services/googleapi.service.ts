@@ -5,9 +5,9 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root',
   })
 export class GoogleApiService {
-    configUrl = 'http://localhost:3000/';
+    configUrl = 'http://'+window.location.hostname+':3000/';
     constructor(private http: HttpClient) { 
-        
+        console.log(window.location.hostname);
     }
   
     getData() {
