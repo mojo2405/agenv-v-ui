@@ -1,0 +1,24 @@
+<div class="container" dir='rtl'>
+  <h1 mat-dialog-title align="center">דירה ב-{{fullData.city}}</h1>
+  <div mat-dialog-content>
+    <p>חדרים: {{fullData.rooms}}</p>
+    <p>מחיר: {{fullData.price}}</p>
+    <p>שם סוכן: {{fullData.agent_name}}</p>
+    <p>כתובת: {{fullData.address}}</p>
+    <p>קומה: {{fullData.floor}}</p>
+    <div style="display:flex;justify-content: space-around;" >
+      <p>ממ"ד: {{fullData.mamad}}</p><p> מעלית: {{fullData.elevator}}</p>
+    </div>
+    <div style="display:flex;justify-content: space-around;" >
+    <p>מרפסת: {{fullData.balcony}}</p><p> גינה: {{fullData.garden}}</p>
+  </div>
+    <div style="display:flex;justify-content: space-around;" >
+    <p>דו-משפחתי: {{fullData.du_mishpahti}}</p><p> פרטי: {{fullData.villa}}</p>
+    </div>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="onNoClick()">סגור</button>
+    <!-- <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button  cdkFocusInitial>Ok</button> -->
+  </div>
+</div>
