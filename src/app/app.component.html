@@ -1,53 +1,26 @@
 <div id="main-container" >
-<div class="top-chips-continer" dir="rtl">
-  <mat-chip-row class="chip-theme" *ngFor="let filter of chips_arr" (removed)="clear_filter()">
-    {{filter}}
-    <!-- <button matChipRemove [attr.aria-label]="'remove ' + filter">
-      <mat-icon>cancel</mat-icon>
-    </button> -->
-  </mat-chip-row>
-</div>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" dir='rtl'>
+  <!-- <mat-tab-group dir="rtl">
+  <mat-tab label="יד2" > <ng-template matTabContent><ng-template mainTable ></ng-template>  </ng-template></mat-tab>
+  <mat-tab label="השכרה" >  <ng-template mainTable ></ng-template> </mat-tab>
+  <mat-tab label="מסחרי" >  <ng-template mainTable ></ng-template> </mat-tab> 
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+  </mat-tab-group> -->
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> מס </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-  </ng-container>
+  <nav mat-tab-nav-bar dir="rtl" >
+    <a mat-tab-link (click)="loadComponent('office')"> 
+      משרד
+    </a>
+    <a mat-tab-link (click)="loadComponent('yad2')"> 
+      יד2
+    </a>
+    <a mat-tab-link (click)="loadComponent('rent')"> 
+      השכרה
+    </a>
+    <a mat-tab-link (click)="loadComponent('commercial')"> 
+      מסחרי
+    </a>
+  </nav>
+  <ng-template mainTable ></ng-template> 
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> עיר </th>
-    <td mat-cell *matCellDef="let element"> {{element.city}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> חדרים </th>
-    <td mat-cell *matCellDef="let element"> {{element.rooms}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> מחיר </th>
-    <td mat-cell *matCellDef="let element"> {{element.price | number: '2.'}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
-</table>
-<div class="filter-button-container">
-  <button mat-fab color="primary" aria-label="Filter Button" (click)="openSearchDialog()">
-    <mat-icon>search</mat-icon>
-  </button>
-</div>
-<div class="refresh-button-container">
-  <button mat-fab color="secondary" aria-label="Refresh Button" (click)="refreshData()">
-    <mat-icon>refresh</mat-icon>
-  </button>
-</div>
 </div>
 <router-outlet></router-outlet>

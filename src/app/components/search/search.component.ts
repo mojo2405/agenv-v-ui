@@ -32,7 +32,7 @@ export interface AptFullData {
       private formBuilder: FormBuilder
     ) {
         this.rooms = ["1","1.5","2","2.5","3","3.5","4","4.5","5","5.5","6+"];
-        this.cities = ["קרית ים", "קרית אתא", "חיפה", "קרית ביאליק", "קרית חיים"];
+        this.cities = ["קרית ים", "קרית אתא", "חיפה", "קרית ביאליק", "קרית חיים","קרית מוצקין", "קרית שמואל"];
         if (data.filter){
             console.log(data.filter);
             this.searchForm.patchValue(data.filter);

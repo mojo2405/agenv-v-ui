@@ -10,7 +10,7 @@ export class GoogleApiService {
         console.log(window.location.hostname);
     }
   
-    getData() {
-        return this.http.get(this.configUrl);
+    getData(apiInputType: string) {
+        return this.http.get(this.configUrl + '?datatype=' + apiInputType);
     }
 }

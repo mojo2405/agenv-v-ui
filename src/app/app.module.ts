@@ -13,11 +13,15 @@ import { SearchModule } from './components/search/search.module';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleApiService } from './services/googleapi.service';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MainTableModule } from './components/tables/main-table.module';
+import { MainTableDirective } from './components/tables/main-table.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainTableDirective
   ],
   imports: [
     BrowserModule,
@@ -30,9 +34,11 @@ import {MatChipsModule} from '@angular/material/chips';
     MatIconModule,
     MatChipsModule,
     AptDataModule,
-    SearchModule
+    SearchModule,
+    MatTabsModule,
+    MainTableModule
   ],
   providers: [GoogleApiService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

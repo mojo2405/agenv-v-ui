@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  web:
+    # image: "mojo2405/agent-v:latest"
+    build: .
+    ports:
+      - "80:80"
+    networks:
+      - my-network-name
+  agent-v-backend:
+    image: "mojo2405/agent-v-backend:latest"
+    ports:
+      - "3000:3000"
+    networks:
+      my-network-name:
+        aliases:
+          - backend
+
+networks:
+  my-network-name: 
+    driver: bridge
+    # external: true
