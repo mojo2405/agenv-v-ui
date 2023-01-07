@@ -6,7 +6,7 @@
       </button> -->
     </mat-chip-row>
   </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" dir='rtl'>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" dir='rtl' [hidden]="!hide_spinner">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -43,13 +43,23 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
   </table>
+<!-- Spinner -->
+  <div [hidden]="hide_spinner"
+  align="center">
+    <mat-spinner
+        class="example-margin"
+        color="accent">
+    </mat-spinner>
+  </div>
+  
+
   <div class="filter-button-container">
     <button mat-fab color="primary" aria-label="Filter Button" (click)="openSearchDialog()">
       <mat-icon>search</mat-icon>
     </button>
   </div>
   <div class="refresh-button-container">
-    <button mat-fab color="secondary" aria-label="Refresh Button" (click)="refreshData()">
+    <button mat-fab color="accent" aria-label="Refresh Button" (click)="refreshData()">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>

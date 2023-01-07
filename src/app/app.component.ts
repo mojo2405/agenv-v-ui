@@ -11,7 +11,13 @@ import { GoogleApiService } from './services/googleapi.service';
 })
 export class AppComponent {
   @ViewChild(MainTableDirective, {static: true}) mainTable!: MainTableDirective;
-
+  myTabs:any = [
+    {key:'office', value: "משרד"},
+    {key:'yad2', value: "יד2"},
+    {key: 'rent', value: "השכרה"},
+    {key: 'commercial', value: "מסחרי"}
+  ];
+  pageHeader = this.myTabs.office;
   constructor(public dialog: MatDialog, private googleAPIService: GoogleApiService){
     
   }
@@ -20,12 +26,14 @@ export class AppComponent {
     this.loadComponent('office');
   }
 
-  loadComponent(apiInputType:string) {
+  loadComponent(apiInputType:any, index:number = 0) {
     const viewContainerRef = this.mainTable.viewContainerRef;
     viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent(MainTableComponent);
     componentRef.instance.apiInputType = apiInputType;
+    
+    this.pageHeader = this.myTabs[index].value;
   }
 }
 

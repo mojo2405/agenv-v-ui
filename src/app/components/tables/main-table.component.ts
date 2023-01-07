@@ -39,6 +39,7 @@ export class MainTableComponent implements AfterViewInit {
       area_max: 'שטח עד'
       };
       chips_arr:any = [];
+    hide_spinner = false;
   
     constructor(public dialog: MatDialog, private googleAPIService: GoogleApiService){
   
@@ -50,6 +51,7 @@ export class MainTableComponent implements AfterViewInit {
   
     refreshData(){
       // this.dataSource.data = [];
+      this.hide_spinner = false;
       this.chips_arr = [];
       apts_elemnt = [];
       this.googleAPIService.getData(this.apiInputType).subscribe((data)=> {
@@ -63,6 +65,7 @@ export class MainTableComponent implements AfterViewInit {
           apts_elemnt.push(detail);
         }
         this.dataSource = new MatTableDataSource(apts_elemnt);
+        this.hide_spinner = true;
       });
     }
   

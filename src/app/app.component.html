@@ -1,26 +1,8 @@
 <div id="main-container" >
-  <!-- <mat-tab-group dir="rtl">
-  <mat-tab label="יד2" > <ng-template matTabContent><ng-template mainTable ></ng-template>  </ng-template></mat-tab>
-  <mat-tab label="השכרה" >  <ng-template mainTable ></ng-template> </mat-tab>
-  <mat-tab label="מסחרי" >  <ng-template mainTable ></ng-template> </mat-tab> 
-
-  </mat-tab-group> -->
-
   <nav mat-tab-nav-bar dir="rtl" >
-    <a mat-tab-link (click)="loadComponent('office')"> 
-      משרד
-    </a>
-    <a mat-tab-link (click)="loadComponent('yad2')"> 
-      יד2
-    </a>
-    <a mat-tab-link (click)="loadComponent('rent')"> 
-      השכרה
-    </a>
-    <a mat-tab-link (click)="loadComponent('commercial')"> 
-      מסחרי
-    </a>
+    <a mat-tab-link *ngFor="let tab of myTabs;  let i = index" (click)="loadComponent(tab.key, i)" >{{tab.value}}</a>
   </nav>
+  <h2 align="center">{{pageHeader}}</h2>
   <ng-template mainTable ></ng-template> 
-
 </div>
 <router-outlet></router-outlet>

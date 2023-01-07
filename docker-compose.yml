@@ -1,5 +1,8 @@
 version: "3.9"
 services:
+  proxy:
+  networks:
+      - my-network-name
   web:
     # image: "mojo2405/agent-v:latest"
     build: .
