@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/toker-storage.service';
 
@@ -28,7 +29,7 @@ export class LoginComponent {
     email ='';
     password = '';
 
-    constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+    constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
     // email = new FormControl('', [Validators.required, Validators.email]);
     
@@ -71,6 +72,7 @@ export class LoginComponent {
     }
 
     reloadPage(): void {
-        window.location.reload();
+        this.router.navigate(['/']);
+        // window.location.reload();
     }
 }   
