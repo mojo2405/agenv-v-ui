@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { MainTableComponent } from './components/tables/main-table.component';
+import { Router } from '@angular/router';
 import { MainTableDirective } from './components/tables/main-table.directive';
-import { GoogleApiService } from './services/googleapi.service';
+import { TokenStorageService } from './services/toker-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,31 +10,27 @@ import { GoogleApiService } from './services/googleapi.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  @ViewChild(MainTableDirective, {static: true}) mainTable!: MainTableDirective;
-  myTabs:any = [
-    {key:'office', value: "משרד"},
-    {key:'yad2', value: "יד2"},
-    {key: 'rent', value: "השכרה"},
-    {key: 'commercial', value: "מסחרי"}
-  ];
-  pageHeader = this.myTabs.office;
-  constructor(public dialog: MatDialog, private googleAPIService: GoogleApiService){
+
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
+  constructor(public dialog: MatDialog, private tokenStorageService: TokenStorageService, private router: Router){
     
   }
 
   ngOnInit() {
-    this.loadComponent('office');
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.username = user.username;
+      this.router.navigate(['/']);
+    }
   }
 
-  loadComponent(apiInputType:any, index:number = 0) {
-    const viewContainerRef = this.mainTable.viewContainerRef;
-    viewContainerRef.clear();
-
-    const componentRef = viewContainerRef.createComponent(MainTableComponent);
-    componentRef.instance.apiInputType = apiInputType;
-    
-    this.pageHeader = this.myTabs[index].value;
-  }
 }
 
 

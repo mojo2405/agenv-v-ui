@@ -1,8 +1,2 @@
-<div id="main-container" >
-  <nav mat-tab-nav-bar dir="rtl" >
-    <a mat-tab-link *ngFor="let tab of myTabs;  let i = index" (click)="loadComponent(tab.key, i)" >{{tab.value}}</a>
-  </nav>
-  <h2 align="center">{{pageHeader}}</h2>
-  <ng-template mainTable ></ng-template> 
-</div>
+
 <router-outlet></router-outlet>

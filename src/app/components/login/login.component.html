@@ -1,0 +1,27 @@
+<div align="center" class="login-div">
+    <mat-card>
+
+        <div class="login-container" dir="rtl">
+            <h2 align="center">התחברות</h2>
+            <form id="ngForm" class="example-form" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill" style="width: 80%;">
+                <mat-label>שם משתמש</mat-label>
+                <input matInput placeholder="" required [(ngModel)]="user.email" name="mail">
+                <!-- <input matInput placeholder="" [formControl]="email" required [(ngModel)]="email"> -->
+                <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width: 80%;">
+                    <mat-label>סיסמא</mat-label>
+                    <input matInput  type="password" required [(ngModel)]="user.password" name="password">
+                    <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+                <mat-error *ngIf="isLoginFailed">
+                    התחברות נכשלה
+                  </mat-error>
+            </form>
+        </div>
+        <mat-card-actions style="justify-content: center;">
+            <button mat-raised-button color="primary" form="ngForm" type="submit">התחבר</button>
+          </mat-card-actions>
+    </mat-card>
+</div>

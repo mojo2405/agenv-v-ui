@@ -55,12 +55,10 @@ export class MainTableComponent implements AfterViewInit {
       this.chips_arr = [];
       apts_elemnt = [];
       this.googleAPIService.getData(this.apiInputType).subscribe((data)=> {
-        console.log(data);
         for (let key of Object.entries(data)) {
           if (parseInt(key[0]) === 0){
             continue;
           }
-          console.log(key);
           let detail = this.mapFromInterface(key);
           apts_elemnt.push(detail);
         }
