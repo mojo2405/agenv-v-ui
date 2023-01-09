@@ -2,7 +2,8 @@
     <nav mat-tab-nav-bar dir="rtl" [tabPanel]="tabPanel">
       <a mat-tab-link *ngFor="let tab of myTabs;  let i = index" (click)="loadComponent(tab.key, i)" >{{tab.value}}</a>
     </nav>
-    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+    <mat-tab-nav-panel #tabPanel>
     <h2 align="center">{{pageHeader}}</h2>
     <ng-template mainTable ></ng-template> 
+</mat-tab-nav-panel>
   </div>
