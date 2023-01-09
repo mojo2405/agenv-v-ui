@@ -12,4 +12,5 @@ export interface IApartment {
     garden: string;
     du_mishpahti: string;
     villa: string;
+    apiInputType: string;
   }

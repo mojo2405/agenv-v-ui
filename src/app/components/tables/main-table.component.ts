@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IApartment } from 'src/app/interface/IApartment';
+import { ICommercial } from 'src/app/interface/ICommercial';
 import { GoogleApiService } from 'src/app/services/googleapi.service';
 import { AptDataComponent } from '../apt-data/apt-data.componont';
 import { SearchComponent } from '../search/search.component';
@@ -14,7 +15,7 @@ export interface SearchElem {
     number_of_rooms_max: string,
   }
   
-  let apts_elemnt: IApartment[] = [];
+  
   
 @Component({
     selector: 'app-main-table',
@@ -25,9 +26,10 @@ export class MainTableComponent implements AfterViewInit {
     @Input() apiInputType:string = '';
     title = 'agent-v';
     displayedColumns: string[] = ['position', 'city', 'rooms', 'price'];
-  
-    dataSource = new MatTableDataSource(apts_elemnt);
-  
+    
+    dataSource = new MatTableDataSource([]);
+    apts_elemnt: IApartment[] = [];
+    commercial_elemnt: ICommercial[] = [];
     dataFilters = '';
     chips_input = {
       city: 'עיר',
@@ -53,39 +55,70 @@ export class MainTableComponent implements AfterViewInit {
       // this.dataSource.data = [];
       this.hide_spinner = false;
       this.chips_arr = [];
-      apts_elemnt = [];
+      this.apts_elemnt = [];
+      this.commercial_elemnt = [];
+
+      
       this.googleAPIService.getData(this.apiInputType).subscribe((data)=> {
+        const matched_ement = this.getMatchingInterface();
         for (let key of Object.entries(data)) {
           if (parseInt(key[0]) === 0){
             continue;
           }
           let detail = this.mapFromInterface(key);
-          apts_elemnt.push(detail);
+          matched_ement.push(detail);
         }
-        this.dataSource = new MatTableDataSource(apts_elemnt);
+        this.dataSource = new MatTableDataSource(matched_ement);
         this.hide_spinner = true;
       });
     }
-  
+    
+    getMatchingInterface():any{
+        if (this.apiInputType == 'commercial'){
+            return this.commercial_elemnt;
+        } else {
+            return this.apts_elemnt;
+        }
+    }
+
     mapFromInterface(key:any){
-      return { 
-        "position": parseInt(key[0]),
-        "agent_name": key[1][0],
-        "city": key[1][1],
-        "rooms": parseInt(key[1][2]),
-        "price": key[1][3],
-        "address": key[1][4],
-        "floor": key[1][5],
-        "elevator": key[1][6],
-        "mamad": key[1][7],
-        "balcony": key[1][8],
-        "garden": key[1][9],
-        "du_mishpahti": key[1][10],
-        "villa": key[1][11]
-      };
+        if (this.apiInputType == 'commercial'){
+            return { 
+                "position": parseInt(key[0]),
+                "agent_name": key[1][0],
+                "city": key[1][1],
+                "rooms": parseInt(key[1][2]),
+                "price": key[1][3],
+                "address": key[1][4],
+                "floor": key[1][5],
+                "elevator": key[1][6],
+                "price_for_1m": key[1][7],
+                "parking": key[1][8],
+                "purpose": key[1][9],
+                "vaad": key[1][10],
+                "comments": key[1][11]
+              };
+        } else{
+            return { 
+                "position": parseInt(key[0]),
+                "agent_name": key[1][0],
+                "city": key[1][1],
+                "rooms": parseInt(key[1][2]),
+                "price": key[1][3],
+                "address": key[1][4],
+                "floor": key[1][5],
+                "elevator": key[1][6],
+                "mamad": key[1][7],
+                "balcony": key[1][8],
+                "garden": key[1][9],
+                "du_mishpahti": key[1][10],
+                "villa": key[1][11]
+              };
+        }
     }
   
     openDialog(data:any): void {
+        data.apiInputType = this.apiInputType;
         const dialogRef = this.dialog.open(AptDataComponent, {
             data: {data},
             height: '400px',
@@ -93,7 +126,7 @@ export class MainTableComponent implements AfterViewInit {
         });
     
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            // console.log('The dialog was closed');
         });
     }
     openSearchDialog():void {
@@ -117,7 +150,10 @@ export class MainTableComponent implements AfterViewInit {
             
     
             this.googleAPIService.getData(this.apiInputType).subscribe((data)=> {
-            apts_elemnt = [];
+            this.apts_elemnt = [];
+            this.commercial_elemnt = [];
+            const matched_ement = this.getMatchingInterface();
+
             for (let key of Object.entries(data)) {
                 if (parseInt(key[0]) === 0){
                 continue;
@@ -154,9 +190,9 @@ export class MainTableComponent implements AfterViewInit {
                     continue;
                 }
                 }
-                apts_elemnt.push(detail);
+                matched_ement.push(detail);
             }
-            this.dataSource = new MatTableDataSource(apts_elemnt);
+            this.dataSource = new MatTableDataSource(matched_ement);
             });
         });
     }

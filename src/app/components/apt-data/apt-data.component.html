@@ -1,6 +1,6 @@
 <div class="container" dir='rtl'>
   <h1 mat-dialog-title align="center">דירה ב-{{fullData.city}}</h1>
-  <div mat-dialog-content>
+  <div mat-dialog-content *ngIf="fullData.apiInputType != 'commercial'; else commercial">
     <p>חדרים: {{fullData.rooms}}</p>
     <p>מחיר: {{fullData.price}}</p>
     <p>שם סוכן: {{fullData.agent_name}}</p>
@@ -16,9 +16,24 @@
     <p>דו-משפחתי: {{fullData.du_mishpahti}}</p><p> פרטי: {{fullData.villa}}</p>
     </div>
   </div>
+  <ng-template #commercial>
+    <div mat-dialog-content>
+      <p>שטח: {{fullData.area}}</p>
+      <p>מחיר: {{fullData.price}}</p>
+      <p>שם סוכן: {{fullData.agent_name}}</p>
+      <p>כתובת: {{fullData.address}}</p>
+      <p>קומה: {{fullData.floor}}</p>
+      <div style="display:flex;justify-content: space-around;" >
+        <p>מחיר למ"ר: {{fullData.price_for_1m}}</p><p> מעלית: {{fullData.elevator}}</p>
+      </div>
+      <div style="display:flex;justify-content: space-around;" >
+      <p>חנייה: {{fullData.parking}}</p> <p>וועד/דמי ניהול: {{fullData.vaad}}</p>
+    </div>
+      <p> ייעוד: {{fullData.purpose}}</p>
+      <p> הערות: {{fullData.comments}}</p>
+    </div>
+  </ng-template>
   <div mat-dialog-actions align="center">
     <button mat-button mat-dialog-close cdkFocusInitial (click)="onNoClick()">סגור</button>
-    <!-- <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button  cdkFocusInitial>Ok</button> -->
   </div>
 </div>
