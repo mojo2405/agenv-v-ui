@@ -25,7 +25,7 @@ export interface SearchElem {
 export class MainTableComponent implements AfterViewInit {
     @Input() apiInputType:string = '';
     title = 'agent-v';
-    displayedColumns: string[] = ['position', 'city', 'rooms', 'price'];
+    displayedColumns: string[] = ['position', 'city', 'rooms', 'price', 'address'];
     
     dataSource = new MatTableDataSource([]);
     apts_elemnt: IApartment[] = [];
