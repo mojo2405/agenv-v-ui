@@ -6,7 +6,7 @@
       </button> -->
     </mat-chip-row>
   </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" dir='rtl' [hidden]="!hide_spinner">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" dir='rtl' [hidden]="!hide_spinner" matSort>
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -19,11 +19,11 @@
 
     <!-- City Column -->
     <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef> עיר </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> עיר </th>
       <td mat-cell *matCellDef="let element"> {{element.city}} </td>
     </ng-container>
 
-    <!-- City Column -->
+    <!-- Address Column -->
     <ng-container matColumnDef="address">
       <th mat-header-cell *matHeaderCellDef> רחוב </th>
       <td mat-cell *matCellDef="let element"> {{element.address}} </td>
@@ -31,7 +31,7 @@
 
     <!-- Rooms Column -->
     <ng-container matColumnDef="rooms" *ngIf="apiInputType!='commercial'">
-      <th mat-header-cell *matHeaderCellDef> חדרים </th>
+      <th mat-header-cell *matHeaderCellDef > חדרים </th>
       <td mat-cell *matCellDef="let element" > {{element.rooms}} </td>
     </ng-container>
      <!-- Area Column -->
@@ -42,7 +42,7 @@
 
     <!-- Price Column -->
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> מחיר </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> מחיר </th>
       <td mat-cell *matCellDef="let element" style="background: #ffffc9;"> {{element.price | number: '2.'}} </td>
     </ng-container>
 

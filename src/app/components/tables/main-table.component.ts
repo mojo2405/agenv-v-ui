@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IApartment } from 'src/app/interface/IApartment';
 import { ICommercial } from 'src/app/interface/ICommercial';
@@ -42,6 +43,7 @@ export class MainTableComponent implements AfterViewInit {
       };
       chips_arr:any = [];
     hide_spinner = false;
+    @ViewChild(MatSort, {static: true}) sort!: MatSort;
   
     constructor(public dialog: MatDialog, private googleAPIService: GoogleApiService){
   
@@ -69,6 +71,7 @@ export class MainTableComponent implements AfterViewInit {
           matched_ement.push(detail);
         }
         this.dataSource = new MatTableDataSource(matched_ement);
+        this.dataSource.sort = this.sort;
         this.hide_spinner = true;
       });
     }
@@ -193,6 +196,7 @@ export class MainTableComponent implements AfterViewInit {
                 matched_ement.push(detail);
             }
             this.dataSource = new MatTableDataSource(matched_ement);
+            this.dataSource.sort = this.sort;
             });
         });
     }

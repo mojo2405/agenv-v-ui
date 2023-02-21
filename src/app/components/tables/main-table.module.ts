@@ -7,6 +7,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatButtonModule } from "@angular/material/button";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSortModule } from "@angular/material/sort";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         MatTableModule,
         MatChipsModule,
         MatButtonModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatSortModule
     ],
     providers: [],
     exports: [MainTableComponent],
