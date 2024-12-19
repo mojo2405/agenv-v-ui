@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   })
 export class GoogleApiService {
     // configUrl = 'http://localhost:3000/';
-    configUrl = 'http://agent-v-backend.myapp.co.il:3000/';
+    configUrl = 'https://agent-v-backend.myapp.co.il/';
     constructor(private http: HttpClient) { 
         console.log(window.location.hostname);
     }
